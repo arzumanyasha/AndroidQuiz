@@ -8,21 +8,29 @@ import android.os.Parcelable;
  */
 
 public class Question implements Parcelable{
+
+    public static final String DIFFICULTY_EASY = "Easy";
+    public static final String DIFFICULTY_MEDIUM = "Medium";
+    public static final String DIFFICULTY_HARD = "Hard";
+
     private String question;
     private String option1;
     private String option2;
     private String option3;
     private int answerNumber;
+    private String difficulty;
 
     public Question() {
     }
 
-    public Question(String question, String option1, String option2, String option3, int answerNumber) {
+    public Question(String question, String option1, String option2,
+                    String option3, int answerNumber, String difficulty) {
         this.question = question;
         this.option1 = option1;
         this.option2 = option2;
         this.option3 = option3;
         this.answerNumber = answerNumber;
+        this.difficulty = difficulty;
     }
 
     protected Question(Parcel in) {
@@ -31,6 +39,7 @@ public class Question implements Parcelable{
         option2 = in.readString();
         option3 = in.readString();
         answerNumber = in.readInt();
+        difficulty = in.readString();
     }
 
     @Override
@@ -40,6 +49,7 @@ public class Question implements Parcelable{
         dest.writeString(option2);
         dest.writeString(option3);
         dest.writeInt(answerNumber);
+        dest.writeString(difficulty);
     }
 
     @Override
@@ -99,4 +109,19 @@ public class Question implements Parcelable{
         this.answerNumber = answerNumber;
     }
 
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public static String[] getAllDifficultyLevels() {
+        return new String[]{
+                DIFFICULTY_EASY,
+                DIFFICULTY_MEDIUM,
+                DIFFICULTY_HARD
+        };
+    }
 }
